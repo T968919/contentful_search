@@ -1,2 +1,3 @@
 # contentful_search
-Python script to return a list of fields in Contentful
+
+For help, please see the Confluence page: https://telusdigital.atlassian.net/wiki/spaces/~569947690/pages/2516254952/Getting+a+list+of+fields+in+Contentful
