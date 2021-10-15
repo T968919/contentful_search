@@ -32,6 +32,9 @@ ascii_art = colors.YELLOW + '''
 ''' + colors.END
 # credit for ascii art to jgs: https://www.asciiart.eu/books/winnie-the-pooh
 
+skip = 0
+items = -1
+
 def options():
     parser = argparse.ArgumentParser(description=colors.YELLOW + 'Search content fields from entries in Contentful spaces' + colors.END)
     parser.add_argument('-t', '--token', type=str, help='content delivery access token')
@@ -52,13 +55,20 @@ def get_missing_params(args):
         args.fields = input(colors.CYAN + 'Enter fields: ' + colors.END).replace(' ', '').split(',')
 
 def get_data(args):
-    reqURL = 'https://cdn.contentful.com/spaces/{0}/environments/{1}/entries?access_token={2}'.format(args.space, args.environ, args.token)
-    try:
-        res = requests.get(reqURL)
-        return res.json()['items']
-    except:
-        print(colors.RED + 'Something went wrong. Check your arguments.' + colors.END)
-        exit()
+    skip = 0
+    items = []
+    while True:
+        reqURL = 'https://cdn.contentful.com/spaces/{0}/environments/{1}/entries?access_token={2}&limit=1000&skip={3}'.format(args.space, args.environ, args.token, skip)
+        try:
+            res = requests.get(reqURL)
+            if len(res.json()['items']) == 0:
+                return items
+            
+            items += res.json()['items']
+            skip += 1000
+        except:
+            print(colors.RED + 'Something went wrong. Check your arguments.' + colors.END)
+            exit()
 
     exit()
 
