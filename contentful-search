@@ -31,9 +31,6 @@ ascii_art = colors.YELLOW + '''
 ''' + colors.END
 # credit for ascii art to jgs: https://www.asciiart.eu/books/winnie-the-pooh
 
-skip = 0
-items = -1
-
 def options():
     parser = argparse.ArgumentParser(description=colors.YELLOW + 'Search content fields from entries in Contentful spaces' + colors.END)
     parser.add_argument('-t', '--token', type=str, help='content delivery access token')
