@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 
-import os
 import requests
 import argparse
 
@@ -69,8 +68,6 @@ def get_data(args):
         except:
             print(colors.RED + 'Something went wrong. Check your arguments.' + colors.END)
             exit()
-
-    exit()
 
 def search_fields(data, fields, createFile):
     results = []
